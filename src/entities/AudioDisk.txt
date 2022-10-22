@@ -1,0 +1,35 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package entities;
+
+/**
+ *
+ * @author Huynh Anh Kiet
+ */
+public class AudioDisk extends CompactDisk {
+    private boolean lossless;
+    public AudioDisk(){}
+    public AudioDisk(String diskID, String name,double price, int quantity, boolean status, boolean lossless){
+        this.setDiskID(diskID);
+        this.setName(name);
+        this.setPrice(price);
+        this.setQuantity(quantity);
+        this.lossless = lossless;
+    }
+    /**
+     * @return the lossless
+     */
+    public boolean isLossless() {
+        return lossless;
+    }
+
+    /**
+     * @param lossless the lossless to set
+     */
+    public void setLossless(boolean lossless) {
+        this.lossless = lossless;
+    }
+    
+}

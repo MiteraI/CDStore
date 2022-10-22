@@ -1,0 +1,35 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package entities;
+
+/**
+ *
+ * @author Huynh Anh Kiet
+ */
+public class VideoDisk extends CompactDisk{
+    private String resolution;
+    public VideoDisk(){}
+    public VideoDisk(String diskID, String name,double price, int quantity, boolean status, String resolution){
+        this.setDiskID(diskID);
+        this.setName(name);
+        this.setPrice(price);
+        this.setQuantity(quantity);
+        this.resolution = resolution;
+    }
+    /**
+     * @return the resolution
+     */
+    public String getResolution() {
+        return resolution;
+    }
+
+    /**
+     * @param resolution the resolution to set
+     */
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
+    
+}

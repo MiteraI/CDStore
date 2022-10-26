@@ -7,7 +7,14 @@ public class GameAudioDisk implements IAudioDisk{
     private String title;
     private String publishYear;
     private double price;
-
+   
+    public GameAudioDisk() {}
+    public GameAudioDisk(String id, String title, String publishYear, double price) {
+        this.id = id;
+        this. title = title;
+        this.publishYear = publishYear;
+        this.price = price;
+    }
     /**
      * @return the id
      */
@@ -63,5 +70,8 @@ public class GameAudioDisk implements IAudioDisk{
     public void setPrice(double price) {
         this.price = price;
     }
-    
+    @Override
+    public String toString() {
+        return this.id +";Audio;Game;"+this.title+";"+this.publishYear+";"+this.price;
+    }
 }

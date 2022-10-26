@@ -10,11 +10,19 @@ import entities.ientities.IVideoDisk;
  *
  * @author Huynh Anh Kiet
  */
-public class GameVideoDisk implements IVideoDisk{private String id;
+public class GameVideoDisk implements IVideoDisk {      
+    private String id;
     private String title;
     private String publishYear;
     private double price;
 
+    public GameVideoDisk() {}
+    public GameVideoDisk(String id, String title, String publishYear, double price) {
+        this.id = id;
+        this. title = title;
+        this.publishYear = publishYear;
+        this.price = price;
+    }
     /**
      * @return the id
      */
@@ -70,5 +78,7 @@ public class GameVideoDisk implements IVideoDisk{private String id;
     public void setPrice(double price) {
         this.price = price;
     }
-     
+    public String toString() {
+        return this.id +";Video;Game;"+this.title+";"+this.publishYear+";"+this.price;
+    }
 }

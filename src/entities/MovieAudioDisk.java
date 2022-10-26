@@ -7,6 +7,13 @@ public class MovieAudioDisk implements IAudioDisk {private String id;
     private String publishYear;
     private double price;
 
+    public MovieAudioDisk() {}
+    public MovieAudioDisk(String id, String title, String publishYear, double price) {
+        this.id = id;
+        this. title = title;
+        this.publishYear = publishYear;
+        this.price = price;
+    }
     /**
      * @return the id
      */
@@ -62,5 +69,8 @@ public class MovieAudioDisk implements IAudioDisk {private String id;
     public void setPrice(double price) {
         this.price = price;
     }
-    
+    @Override
+    public String toString() {
+        return this.id +";Audio;Movie;"+this.title+";"+this.publishYear+";"+this.price;
+    }
 }

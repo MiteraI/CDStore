@@ -13,5 +13,4 @@ import entities.ientities.ICompactDisk;
  */
 public class CDList extends ArrayList<ICompactDisk>{
     public CDList() {};
-    public CDList(String data) {}
 }

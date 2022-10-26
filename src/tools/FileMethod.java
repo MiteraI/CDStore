@@ -1,11 +1,12 @@
 package tools;
 
 import java.io.*;
-import java.util.List;
 import java.util.ArrayList;
 
+import list.CDList;
+
 public class FileMethod {
-    public static List<String> readLinesFromFile(String filename) {
+    public static ArrayList<String> readLinesFromFile(String filename) {
         ArrayList<String> list = new ArrayList<>();
         File f = new File(filename);
         if (f.exists()) {
@@ -27,13 +28,13 @@ public class FileMethod {
         }
         return list;
     }
-    public static void writeFile(String filename, List<Object> list) {
+    public static void writeFile(String filename, CDList list) {
         if (list != null && !list.isEmpty()) {
             try {
                 FileWriter fw = new FileWriter(filename);
                 PrintWriter pw = new PrintWriter(fw);
                 for (Object item : list) {
-                    pw.println(item);
+                    pw.println(item.toString());
                 }
                 fw.close();
                 pw.close();

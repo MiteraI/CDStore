@@ -7,7 +7,15 @@ public class MovieVideoDisk implements IVideoDisk {
     private String title;
     private String publishYear;
     private double price;
+    
 
+    public MovieVideoDisk() {}
+    public MovieVideoDisk(String id, String title, String publishYear, double price) {
+        this.id = id;
+        this. title = title;
+        this.publishYear = publishYear;
+        this.price = price;
+    }
     /**
      * @return the id
      */
@@ -63,5 +71,8 @@ public class MovieVideoDisk implements IVideoDisk {
     public void setPrice(double price) {
         this.price = price;
     }
-    
+    @Override
+    public String toString() {
+        return this.id +";Video;Movie;"+this.title+";"+this.publishYear+";"+this.price;
+    }
 }

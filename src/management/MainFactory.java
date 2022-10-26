@@ -1,5 +1,7 @@
 package management;
 
+import data.FileHandler;
+import data.IFileHandler;
 import factory.AudioDiskFactory;
 import factory.VideoDiskFactory;
 import factory.ifactory.IDiskFactory;
@@ -27,5 +29,8 @@ public class MainFactory {
     }
     public final static IDiskFactory newVideoDiskFactory() {
         return new VideoDiskFactory();
+    }
+    public final static IFileHandler newFileHandler() {
+        return new FileHandler();
     }
 }

@@ -1,5 +1,5 @@
 package tools;
 
-public class CustomEH {
+public class ErrorHandler {
     
 }

@@ -9,5 +9,5 @@ package entities.ientities;
  * @author Huynh Anh Kiet
  */
 public interface ICompactDisk {
-    
+    public String toString();
 }

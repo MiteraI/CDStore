@@ -1,5 +1,6 @@
 package management;
 
+import data.IFileHandler;
 import entities.ientities.ICompactDisk;
 import list.CDList;
 import service.iservice.*;;
@@ -19,11 +20,11 @@ public class CDMng {
         ICreator creator = MainFactory.newCreator();
         IPrinter printer = MainFactory.newPrinter();
         IUpdater updater = MainFactory.newUpdater();
-        printer.getClass();
-        updater.getClass();
-        creator.addDisk(list);
+        IFileHandler fileHandler = MainFactory.newFileHandler();
+        
+        fileHandler.loadCDFromFile(list);
         for(ICompactDisk disk: list) {
-            System.out.println(disk.getClass().toString());
+            System.out.println(disk.toString());
         }
     }
     

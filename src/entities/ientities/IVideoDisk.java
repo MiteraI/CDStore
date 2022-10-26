@@ -9,5 +9,4 @@ package entities.ientities;
  * @author Huynh Anh Kiet
  */
 public interface IVideoDisk extends ICompactDisk {
-    
 }

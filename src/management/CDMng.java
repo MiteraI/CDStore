@@ -19,9 +19,11 @@ public class CDMng {
         ICreator creator = MainFactory.newCreator();
         IPrinter printer = MainFactory.newPrinter();
         IUpdater updater = MainFactory.newUpdater();
+        printer.getClass();
+        updater.getClass();
         creator.addDisk(list);
         for(ICompactDisk disk: list) {
-            System.out.println(disk.getClass());
+            System.out.println(disk.getClass().toString());
         }
     }
     

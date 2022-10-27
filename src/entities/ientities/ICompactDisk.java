@@ -9,7 +9,11 @@ package entities.ientities;
  * @author Huynh Anh Kiet
  */
 public interface ICompactDisk {
+    static final String SEPARATOR = ";";
+    static final String FORMAT_HEADER = "|%-6s|%-10s|%-10s|%-20s|%6s|%8s|\n";
+    static final String FORMAT_STRING = "|%-6s|%-10s|%-10s|%-20s|%6s|%8s|";
     public String toString();
+    public String toTable();
     String getId();
     double getPrice();
     String getPublishYear();

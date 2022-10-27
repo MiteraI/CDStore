@@ -4,8 +4,6 @@
  */
 package service;
 
-import java.util.ArrayList;
-
 import entities.ientities.ICompactDisk;
 import list.CDList;
 import service.iservice.IPrinter;
@@ -19,34 +17,64 @@ public class Printer implements IPrinter {
 
     @Override
     public void printList(CDList list) {
+        if (list.isEmpty()) {
+            System.out.println("Empty list!");
+            return;
+        }
+        System.out.printf(ICompactDisk.FORMAT_HEADER,"  ID","TYPE","COLLECTION","NAME","YEAR","PRICE");
         for (ICompactDisk disk : list) {
-            System.out.println(disk.toString());
+            System.out.println(disk.toTable());
         }
 
     }
 
     @Override
     public void printByTitle(CDList list) {
-        ArrayList<String> infoList = new ArrayList<>();
+        CDList tmpList = new CDList();
         String searchStr = ParseMethod.readNonBlank("Enter name to find: ");
         boolean nameFound = false;
         for (ICompactDisk disk : list) {
-            if ((disk.getTitle()).contains(searchStr)) {
+            if ((disk.getTitle()).contains(searchStr.toUpperCase())) {
                 System.out.println(searchStr + " is found at disk's id: " + disk.getId());
                 nameFound = true;
-                infoList.add(disk.toString());
+                tmpList.add(disk);
             }
         }
         if (!nameFound) {
             System.out.print("\nName not in list\n");
             return;
         }
-        System.out.println(infoList);
+        System.out.printf(ICompactDisk.FORMAT_HEADER, "  ID", "TYPE", "COLLECTION", "NAME", "YEAR", "PRICE");
+        for (ICompactDisk disk : tmpList) {
+            System.out.println(disk.toTable());
+        }
     }
 
     @Override
     public void printByType(CDList list) {
-        // TODO Auto-generated method stub
+        if (list.isEmpty()) {
+            System.out.println("Empty list!");
+            return;
+        }
+        char type = ParseMethod.readType("Enter type of disk to search: ", IPrinter.type);
+        char collect = ParseMethod.readType("Enter collection of disk to search: ", IPrinter.collection);
+        String find = Character.toString(type) + Character.toString(collect);
+        boolean exist = false;
+        CDList tmpList = new CDList();
+        for (ICompactDisk disk : list) {
+            if (disk.getId().contains(find.toUpperCase())) {
+                tmpList.add(disk);
+                exist = true;
+            }
+        }
+        if (!exist) {
+            System.out.println("No disk with this type exist!");
+            return;
+        }
+        System.out.printf(ICompactDisk.FORMAT_HEADER, "  ID", "TYPE", "COLLECTION", "NAME", "YEAR", "PRICE");
+        for (ICompactDisk disk : tmpList) {
+            System.out.println(disk.toTable());
+        }
 
     }
 

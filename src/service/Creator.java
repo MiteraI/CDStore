@@ -17,8 +17,9 @@ public class Creator implements ICreator {
 
     @Override
     public void addDisk(CDList list) {
-        boolean choice = false;
+        boolean choice;
         do {
+            choice = false;
             char type = ParseMethod.readType("Type of CD to add: ", ICreator.type);
             switch (type) {
                 case 'V' -> {
@@ -66,6 +67,9 @@ public class Creator implements ICreator {
                 }
             }
         } while (choice);
+        System.out.println("New disk added!");
+        System.out.printf(ICompactDisk.FORMAT_HEADER,"  ID","TYPE","COLLECTION","NAME","YEAR","PRICE");
+        System.out.println(list.get(list.size()-1).toTable());
     }
 
     private void addDiskInfo(CDList list, String type) {

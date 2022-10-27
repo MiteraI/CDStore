@@ -22,11 +22,13 @@ public class CDMng {
         IDeleter deleter = MainFactory.newDeleter();
         Menu mnu = MainFactory.newMenu();
         IFileHandler fileHandler = MainFactory.newFileHandler();
-        boolean changed = false;
         fileHandler.loadCDFromFile(list);
+        mnu.clearConsole();
+        boolean changed = false;
         int choice = 0;
-        do {
+        do {         
             choice = mnu.getChoice("--------DISK STORE--------");
+            mnu.clearConsole();
             switch (choice) {
                 case 1 -> {
                     creator.addDisk(list);
@@ -56,7 +58,7 @@ public class CDMng {
                     }
                 }
             }
-        } while (choice > 0 && choice <= list.size());
+        } while (choice > 0 && choice <= mnu.size());
         System.out.println("Good Bye!");
     }
 }

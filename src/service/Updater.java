@@ -26,19 +26,29 @@ public class Updater implements IUpdater {
 
     @Override
     public void updateDisk(CDList list) {
+        boolean exist = false;
+        int index = -1;
         if (list.isEmpty()) {
             System.out.println("Empty list!");
             return;
         }
         this.id = ParseMethod.readPattern("Enter disk's id: ", ID_FORMAT);
-        for (ICompactDisk disk : list) {
-            if (!disk.getId().equals(id.toUpperCase())) {
-                System.out.println("No disk with this id exist!");
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId().equalsIgnoreCase(id)) {
+                exist = true;
+                index = i;
+            }
+        }
+        if (exist == false) {
+            System.out.println("No disk with this id exist!");
+            return;
+        } else {
+            if (!addDisk(list)) {
+                System.out.println("Quit updating!");
                 return;
             }
-            addDisk(list);
             if (ParseMethod.readBool("Are you sure to change the disk's information? ")) {
-                list.remove(disk);
+                list.remove(index);
                 return;
             } else {
                 list.remove(list.size() - 1);
@@ -47,9 +57,12 @@ public class Updater implements IUpdater {
         }
     }
 
-    private void addDisk(CDList list) {
-        boolean choice = false;
+    private boolean addDisk(CDList list) {
+        boolean choice;
+        boolean success;
         do {
+            choice = false;
+            success = true;
             char type = ParseMethod.readType("Type of CD to add: ", ICreator.type);
             switch (type) {
                 case 'V' -> {
@@ -69,6 +82,7 @@ public class Updater implements IUpdater {
                         }
                         default -> {
                             choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                            success = choice;
                         }
                     }
                 }
@@ -89,14 +103,17 @@ public class Updater implements IUpdater {
                         }
                         default -> {
                             choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                            success = choice;
                         }
                     }
                 }
                 default -> {
                     choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                    success = choice;
                 }
             }
         } while (choice);
+        return success;
     }
 
     private void addDiskInfo(CDList list, String type) {

@@ -7,6 +7,7 @@ import factory.VideoDiskFactory;
 import factory.ifactory.IDiskFactory;
 import list.CDList;
 import service.Creator;
+import service.Deleter;
 import service.Printer;
 import service.Updater;
 import service.iservice.*;
@@ -20,6 +21,12 @@ public class MainFactory {
     }
     final static IUpdater newUpdater() {
         return new Updater();
+    }
+    final static IDeleter newDeleter() {
+        return new Deleter();
+    }
+    final static Menu newMenu() {
+        return new Menu();
     }
     final static CDList initList() {
         return new CDList();

@@ -10,4 +10,12 @@ package entities.ientities;
  */
 public interface ICompactDisk {
     public String toString();
+    String getId();
+    double getPrice();
+    String getPublishYear();
+    String getTitle();
+    void setId(String id);
+    void setPrice(double price);
+    void setPublishYear(String publishYear);
+    void setTitle(String title);
 }

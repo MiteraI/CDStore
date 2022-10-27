@@ -4,30 +4,50 @@
  */
 package service;
 
+import java.util.ArrayList;
+
+import entities.ientities.ICompactDisk;
 import list.CDList;
-import service.iservice.IPrinter;;
+import service.iservice.IPrinter;
+import tools.ParseMethod;;
+
 /**
  *
  * @author Huynh Anh Kiet
  */
-public class Printer implements IPrinter{
+public class Printer implements IPrinter {
 
     @Override
     public void printList(CDList list) {
-        // TODO Auto-generated method stub
-        
+        for (ICompactDisk disk : list) {
+            System.out.println(disk.toString());
+        }
+
     }
 
     @Override
-    public void printAudioDisk(CDList list) {
-        // TODO Auto-generated method stub
-        
+    public void printByTitle(CDList list) {
+        ArrayList<String> infoList = new ArrayList<>();
+        String searchStr = ParseMethod.readNonBlank("Enter name to find: ");
+        boolean nameFound = false;
+        for (ICompactDisk disk : list) {
+            if ((disk.getTitle()).contains(searchStr)) {
+                System.out.println(searchStr + " is found at disk's id: " + disk.getId());
+                nameFound = true;
+                infoList.add(disk.toString());
+            }
+        }
+        if (!nameFound) {
+            System.out.print("\nName not in list\n");
+            return;
+        }
+        System.out.println(infoList);
     }
 
     @Override
-    public void printVideoDisk(CDList list) {
+    public void printByType(CDList list) {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
 }

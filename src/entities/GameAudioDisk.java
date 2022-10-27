@@ -18,6 +18,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @return the id
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -25,6 +26,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @param id the id to set
      */
+    @Override
     public void setId(String id) {
         this.id = id;
     }
@@ -32,6 +34,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @return the title
      */
+    @Override
     public String getTitle() {
         return title;
     }
@@ -39,6 +42,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @param title the title to set
      */
+    @Override
     public void setTitle(String title) {
         this.title = title;
     }
@@ -46,6 +50,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @return the publishYear
      */
+    @Override
     public String getPublishYear() {
         return publishYear;
     }
@@ -53,6 +58,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @param publishYear the publishYear to set
      */
+    @Override
     public void setPublishYear(String publishYear) {
         this.publishYear = publishYear;
     }
@@ -60,6 +66,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @return the price
      */
+    @Override
     public double getPrice() {
         return price;
     }
@@ -67,6 +74,7 @@ public class GameAudioDisk implements IAudioDisk{
     /**
      * @param price the price to set
      */
+    @Override
     public void setPrice(double price) {
         this.price = price;
     }

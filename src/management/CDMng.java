@@ -1,10 +1,9 @@
 package management;
 
 import data.IFileHandler;
-import entities.ientities.ICompactDisk;
 import list.CDList;
-import service.iservice.*;;
-
+import service.iservice.*;
+import tools.ParseMethod;;
 
 /**
  *
@@ -20,12 +19,44 @@ public class CDMng {
         ICreator creator = MainFactory.newCreator();
         IPrinter printer = MainFactory.newPrinter();
         IUpdater updater = MainFactory.newUpdater();
+        IDeleter deleter = MainFactory.newDeleter();
+        Menu mnu = MainFactory.newMenu();
         IFileHandler fileHandler = MainFactory.newFileHandler();
-        
+        boolean changed = false;
         fileHandler.loadCDFromFile(list);
-        for(ICompactDisk disk: list) {
-            System.out.println(disk.toString());
-        }
+        int choice = 0;
+        do {
+            choice = mnu.getChoice("--------DISK STORE--------");
+            switch (choice) {
+                case 1 -> {
+                    creator.addDisk(list);
+                    changed = true;
+                }
+                case 2 -> {
+                    updater.updateDisk(list);
+                    changed = true;
+                }
+                case 3 -> {
+                    deleter.deleteDisk(list);
+                    changed = true;
+                }
+                case 4 -> printer.printByTitle(list);
+                case 5 -> printer.printList(list);
+                case 6 -> printer.printByType(list);
+                case 7 -> {
+                    fileHandler.saveToFile(list);
+                    changed = false;
+                }
+                default -> {
+                    boolean res = false;
+                    if (changed)
+                        res = ParseMethod.readBool("Data changed. Write to file? ");
+                    if (res == true) {
+                        fileHandler.saveToFile(list);
+                    }
+                }
+            }
+        } while (choice > 0 && choice <= list.size());
+        System.out.println("Good Bye!");
     }
-    
 }

@@ -1,6 +1,6 @@
 package service;
 
-import data.FileHandler;
+import entities.ientities.ICompactDisk;
 import factory.ifactory.IDiskFactory;
 import list.CDList;
 import management.MainFactory;
@@ -17,24 +17,23 @@ public class Creator implements ICreator {
 
     @Override
     public void addDisk(CDList list) {
-        // TODO Auto-generated method stub
         boolean choice = false;
         do {
-            char type = ParseMethod.readType("Type of CD to add ", ICreator.type);
+            char type = ParseMethod.readType("Type of CD to add: ", ICreator.type);
             switch (type) {
                 case 'V' -> {
-                    char collection = ParseMethod.readType("Collection of CD to add ", ICreator.collection);
+                    char collection = ParseMethod.readType("Collection of CD to add: ", ICreator.collection);
                     switch (collection) {
                         case 'G' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "VG");
                             list.add(videoDiskFactory.addGameDisk("VG" + id, title, publishYear, price));
                         }
                         case 'F' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "VF");
                             list.add(videoDiskFactory.addMovieDisk("VF" + id, title, publishYear, price));
                         }
                         case 'M' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "VM");
                             list.add(videoDiskFactory.addMusicDisk("VM" + id, title, publishYear, price));
                         }
                         default -> {
@@ -43,18 +42,18 @@ public class Creator implements ICreator {
                     }
                 }
                 case 'A' -> {
-                    char collection = ParseMethod.readType("Collection of CD to add ", ICreator.collection);
+                    char collection = ParseMethod.readType("Collection of CD to add: ", ICreator.collection);
                     switch (collection) {
                         case 'G' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "AG");
                             list.add(videoDiskFactory.addGameDisk("AG" + id, title, publishYear, price));
                         }
                         case 'F' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "AF");
                             list.add(videoDiskFactory.addMovieDisk("AF" + id, title, publishYear, price));
                         }
                         case 'M' -> {
-                            addDiskInfo();
+                            addDiskInfo(list, "AM");
                             list.add(videoDiskFactory.addMusicDisk("AM" + id, title, publishYear, price));
                         }
                         default -> {
@@ -69,19 +68,24 @@ public class Creator implements ICreator {
         } while (choice);
     }
 
-    private void addDiskInfo() {
-        this.id = ParseMethod.readPattern("Enter disk's id: ", ICreator.ID_FORMAT);
+    private void addDiskInfo(CDList list, String type) {
+        boolean exist = true;
+        do {
+            this.id = ParseMethod.readPattern("Enter disk's id: ", ICreator.ID_FORMAT);
+            exist = checkCode(list, this.id, type);
+        } while (exist);
         this.title = ParseMethod.readNonBlank("Enter disk's title: ");
         this.publishYear = ParseMethod.readPattern("Enter disk's publish year: ", ICreator.YEAR_FORMAT);
         this.price = Double.toString(ParseMethod.readRangeDouble("Enter disk's unit price: ", 0, 50));
     }
 
-    public static void main(String[] args) {
-        CDList list = new CDList();
-        ICreator creator = new Creator();
-        creator.addDisk(list);
-        for (Object stuff:list) System.out.println(stuff.toString());
-        FileHandler fh = new FileHandler();
-        fh.saveToFile(list);
+    private boolean checkCode(CDList list, String id, String type) {
+        for (ICompactDisk disk : list) {
+            if (disk.getId().equals(type + id)) {
+                System.out.println("Duplicated ID. Try again!");
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -18,6 +18,8 @@ public interface ICompactDisk {
     double getPrice();
     String getPublishYear();
     String getTitle();
+    String getType();
+    String getCollect();
     void setId(String id);
     void setPrice(double price);
     void setPublishYear(String publishYear);

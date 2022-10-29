@@ -7,8 +7,8 @@ public class MusicAudioDisk implements IAudioDisk {
     private String title;
     private String publishYear;
     private double price;
-    private String type = "AUDIO";
-    private String collect = "MUSIC";
+    private final String type = "AUDIO";
+    private final String collect = "MUSIC";
 
     public MusicAudioDisk() {
     }
@@ -74,6 +74,16 @@ public class MusicAudioDisk implements IAudioDisk {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getCollect() {
+        return collect;
     }
 
     @Override

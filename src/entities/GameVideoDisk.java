@@ -15,8 +15,8 @@ public class GameVideoDisk implements IVideoDisk {
     private String title;
     private String publishYear;
     private double price;
-    private String type = "VIDEO";
-    private String collect = "GAME";
+    private final String type = "VIDEO";
+    private final String collect = "GAME";
 
     public GameVideoDisk() {
     }
@@ -82,6 +82,16 @@ public class GameVideoDisk implements IVideoDisk {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getCollect() {
+        return collect;
     }
 
     public String toString() {

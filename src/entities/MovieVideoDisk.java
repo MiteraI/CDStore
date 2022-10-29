@@ -7,8 +7,8 @@ public class MovieVideoDisk implements IVideoDisk {
     private String title;
     private String publishYear;
     private double price;
-    private String type = "VIDEO";
-    private String collect = "MOVIE";
+    private final String type = "VIDEO";
+    private final String collect = "MOVIE";
 
     public MovieVideoDisk() {
     }
@@ -74,6 +74,16 @@ public class MovieVideoDisk implements IVideoDisk {
      */
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public String getCollect() {
+        return collect;
     }
 
     @Override

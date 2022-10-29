@@ -20,10 +20,10 @@ public class Creator implements ICreator {
         boolean choice;
         do {
             choice = false;
-            char type = ParseMethod.readType("Type of CD to add: ", ICreator.type);
+            char type = ParseMethod.readChar("Type of CD to add " + ICreator.type + ": ");
             switch (type) {
                 case 'V' -> {
-                    char collection = ParseMethod.readType("Collection of CD to add: ", ICreator.collection);
+                    char collection = ParseMethod.readChar("Collection of CD to add " + ICreator.collection + ": ");
                     switch (collection) {
                         case 'G' -> {
                             addDiskInfo(list, "VG");
@@ -38,12 +38,12 @@ public class Creator implements ICreator {
                             list.add(videoDiskFactory.addMusicDisk("VM" + id, title, publishYear, price));
                         }
                         default -> {
-                            choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                            choice = ParseMethod.readBool("Unsuccessful. Try again? ");
                         }
                     }
                 }
                 case 'A' -> {
-                    char collection = ParseMethod.readType("Collection of CD to add: ", ICreator.collection);
+                    char collection = ParseMethod.readChar("Collection of CD to add " + ICreator.collection + ": ");
                     switch (collection) {
                         case 'G' -> {
                             addDiskInfo(list, "AG");
@@ -58,12 +58,12 @@ public class Creator implements ICreator {
                             list.add(videoDiskFactory.addMusicDisk("AM" + id, title, publishYear, price));
                         }
                         default -> {
-                            choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                            choice = ParseMethod.readBool("Unsuccessful. Try again? ");
                         }
                     }
                 }
                 default -> {
-                    choice = ParseMethod.readBool("Unsuccessful. Want to try again? ");
+                    choice = ParseMethod.readBool("Unsuccessful. Try again? ");
                 }
             }
         } while (choice);

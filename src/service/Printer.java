@@ -35,7 +35,7 @@ public class Printer implements IPrinter {
         boolean nameFound = false;
         for (ICompactDisk disk : list) {
             if ((disk.getTitle()).contains(searchStr.toUpperCase())) {
-                System.out.println(searchStr + " is found at disk's id: " + disk.getId());
+                //System.out.println(searchStr + " is found at disk's id: " + disk.getId());
                 nameFound = true;
                 tmpList.add(disk);
             }
@@ -56,13 +56,15 @@ public class Printer implements IPrinter {
             System.out.println("Empty list!");
             return;
         }
-        char type = ParseMethod.readType("Enter type of disk to search: ", IPrinter.type);
-        char collect = ParseMethod.readType("Enter collection of disk to search: ", IPrinter.collection);
+        String message = "Enter type of disk to print " + IPrinter.type + " (leave blank to include all): ";
+        char type = ParseMethod.readChar(message, true, ' ');
+        message = "Enter collection of disk to search " + IPrinter.collection + " (leave blank to include all): ";
+        char collect = ParseMethod.readChar(message, true, ' ');
         String find = Character.toString(type) + Character.toString(collect);
         boolean exist = false;
         CDList tmpList = new CDList();
         for (ICompactDisk disk : list) {
-            if (disk.getId().contains(find.toUpperCase())) {
+            if (disk.getId().contains(find.toUpperCase().trim())) {
                 tmpList.add(disk);
                 exist = true;
             }

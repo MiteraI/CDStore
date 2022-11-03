@@ -67,22 +67,22 @@ public class Updater implements IUpdater {
             choice = false;
             success = true;
             message = "New CD type " + ICreator.type + " (leave blank to skip): ";
-            char type = ParseMethod.readChar(message, true, cdUpdate.getType().charAt(0));
+            char type = ParseMethod.readChar(message, true, cdUpdate.getId().charAt(0));
             switch (type) {
                 case 'V' -> {
                     message = "New collection name " + ICreator.collection + " (leave blank to skip): ";
-                    char collection = ParseMethod.readChar(message, true, cdUpdate.getCollect().charAt(0));
+                    char collection = ParseMethod.readChar(message, true, cdUpdate.getId().charAt(1));
                     switch (collection) {
                         case 'G' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "VG");
                             list.add(videoDiskFactory.addGameDisk("VG" + id, title, publishYear, price));
                         }
                         case 'F' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "VF");
                             list.add(videoDiskFactory.addMovieDisk("VF" + id, title, publishYear, price));
                         }
                         case 'M' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "VM");
                             list.add(videoDiskFactory.addMusicDisk("VM" + id, title, publishYear, price));
                         }
                         default -> {
@@ -93,18 +93,18 @@ public class Updater implements IUpdater {
                 }
                 case 'A' -> {
                     message = "New collection name " + ICreator.collection + " (leave blank to skip): ";
-                    char collection = ParseMethod.readChar(message, true, cdUpdate.getCollect().charAt(0));
+                    char collection = ParseMethod.readChar(message, true, cdUpdate.getId().charAt(1));
                     switch (collection) {
                         case 'G' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "AG");
                             list.add(videoDiskFactory.addGameDisk("AG" + id, title, publishYear, price));
                         }
                         case 'F' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "AF");
                             list.add(videoDiskFactory.addMovieDisk("AF" + id, title, publishYear, price));
                         }
                         case 'M' -> {
-                            addDiskInfo(list);
+                            addDiskInfo(list, "AM");
                             list.add(videoDiskFactory.addMusicDisk("AM" + id, title, publishYear, price));
                         }
                         default -> {
@@ -122,7 +122,13 @@ public class Updater implements IUpdater {
         return success;
     }
 
-    private void addDiskInfo(CDList list) {
+    private void addDiskInfo(CDList list, String type) {
+        boolean exist = true;
+        do {
+            this.id = ParseMethod.readPattern("Enter disk's id: ", ICreator.ID_FORMAT);
+            exist = checkCode(list, this.id, type);
+        } while (exist);
+        
         String message = "New title (leave blank to skip): ";
         this.title = ParseMethod.readPattern(message, ParseMethod.REGEX_ANY);
         if (title.isEmpty())
@@ -135,5 +141,15 @@ public class Updater implements IUpdater {
 
         message = "New unit price (leave blank to skip): ";
         this.price = Double.toString(ParseMethod.readRangeDouble(message, 0, 50, true, cdUpdate.getPrice()));
+    }
+
+    private boolean checkCode(CDList list, String id, String type) {
+        for (ICompactDisk disk : list) {
+            if (disk.getId().equals(type + id)) {
+                System.out.println("Duplicated ID. Try again!");
+                return true;
+            }
+        }
+        return false;
     }
 }

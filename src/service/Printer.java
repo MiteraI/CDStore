@@ -7,7 +7,7 @@ package service;
 import entities.ientities.ICompactDisk;
 import list.CDList;
 import service.iservice.IPrinter;
-import tools.ParseMethod;;
+import tools.ParseMethod;
 
 /**
  *
@@ -57,10 +57,11 @@ public class Printer implements IPrinter {
             return;
         }
         String message = "Enter type of disk to print " + IPrinter.type + " (leave blank to include all): ";
-        char type = ParseMethod.readChar(message, true, ' ');
+        char typeInput = ParseMethod.readChar(message, true, ' ');
         message = "Enter collection of disk to search " + IPrinter.collection + " (leave blank to include all): ";
-        char collect = ParseMethod.readChar(message, true, ' ');
-        String find = Character.toString(type) + Character.toString(collect);
+        char collectInput = ParseMethod.readChar(message, true, ' ');
+        String find = String.valueOf(typeInput) + String.valueOf(collectInput);
+        find.trim();
         boolean exist = false;
         CDList tmpList = new CDList();
         for (ICompactDisk disk : list) {

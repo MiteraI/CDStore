@@ -61,7 +61,6 @@ public class Printer implements IPrinter {
         message = "Enter collection of disk to search " + IPrinter.collection + " (leave blank to include all): ";
         char collectInput = ParseMethod.readChar(message, true, ' ');
         String find = String.valueOf(typeInput) + String.valueOf(collectInput);
-        find.trim();
         boolean exist = false;
         CDList tmpList = new CDList();
         for (ICompactDisk disk : list) {
